@@ -1,36 +1,25 @@
-import Link from "next/link";
+import useDates from "~/utils/useDates";
 
 export default function HomePage() {
+  const { monthDatesToRender } = useDates(new Date());
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
+    <main className="min-h-screen bg-gray-300 p-2">
+      <div className="grid grid-cols-7 gap-[1px] bg-black p-[1px]">
+        <div className="bg-gray-300 px-2 py-1">sunday</div>
+        <div className="bg-gray-300 px-2 py-1">monday</div>
+        <div className="bg-gray-300 px-2 py-1">tuesday</div>
+        <div className="bg-gray-300 px-2 py-1">wednesday</div>
+        <div className="bg-gray-300 px-2 py-1">thursday</div>
+        <div className="bg-gray-300 px-2 py-1">friday</div>
+        <div className="bg-gray-300 px-2 py-1">saturday</div>
+        {monthDatesToRender.map((date, index) => {
+          return (
+            <div key={index} className={`h-20 bg-gray-300 p-2`}>
+              {date}
             </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div>
+          );
+        })}
       </div>
     </main>
   );
