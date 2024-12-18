@@ -1,11 +1,28 @@
+const months = [
+    { name: 'January', short: 'Jan' },
+    { name: 'February', short: 'Feb' },
+    { name: 'March', short: 'Mar' },
+    { name: 'April', short: 'Apr' },
+    { name: 'May', short: 'May' },
+    { name: 'June', short: 'Jun' },
+    { name: 'July', short: 'Jul' },
+    { name: 'August', short: 'Aug' },
+    { name: 'September', short: 'Sep' },
+    { name: 'October', short: 'Oct' },
+    { name: 'November', short: 'Nov' },
+    { name: 'December', short: 'Dec' },
+]
+
 export default function useDates(date: Date) {
+
     const displayedDate = new Date(date);
     const currentDate = new Date();
     const displayedMonth = displayedDate.getMonth();
+    const month = months[displayedMonth] ? months[displayedMonth] : { name: 'Something went wrong', short: '' };
     const displayedYear = displayedDate.getFullYear();
     const daysInMonth = new Date(displayedYear, displayedMonth + 1, 0).getDate();
     const firstDay = new Date(displayedYear, displayedMonth, 1).getDay();
-    const lastMonthDays = new Date(displayedYear, displayedMonth - 1, 0).getDate();
+    const lastMonthDays = new Date(displayedYear, displayedMonth, 0).getDate();
     const monthDatesToRender = getDatesToDisplay();
     const displaysLastMonth = firstDay > 0;
     const displaysNextMonth = monthDatesToRender.length % 7 !== 0;
@@ -16,12 +33,14 @@ export default function useDates(date: Date) {
       });
   
       if (firstDay > 0) {
+        console.log('last month days', lastMonthDays);
         const daysToAdd = firstDay;
         const lastMonthDates = Array.from({ length: daysToAdd }).map(
           (_, index) => {
             return lastMonthDays - daysToAdd + index + 1;
           },
         );
+        console.log("last month dates", lastMonthDates);
   
         dates = [...lastMonthDates, ...dates];
       }
@@ -47,6 +66,7 @@ export default function useDates(date: Date) {
         currentDate,
         displayedDate,
         displaysLastMonth,
-        displaysNextMonth
+        displaysNextMonth,
+        month,
     }
 }
