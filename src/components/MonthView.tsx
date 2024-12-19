@@ -1,4 +1,3 @@
-import { days } from "~/utils/globals";
 import Weekdays from "./Weekdays";
 
 const MonthView = ({
