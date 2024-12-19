@@ -1,19 +1,19 @@
 import Weekdays from "./Weekdays";
 
-const MonthView = ({
+const WeekView = ({
   currentDateOnDisplay,
-  monthDatesToRender,
+  weekDatesToRender,
   currentDate,
 }: {
   currentDateOnDisplay: boolean;
-  monthDatesToRender: number[];
+  weekDatesToRender: number[];
   currentDate: Date;
 }) => {
   return (
     <div className="flex h-full flex-col gap-[1px] bg-black p-[1px]">
       <Weekdays />
       <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto">
-        {monthDatesToRender.map((date, index) => {
+        {weekDatesToRender.map((date, index) => {
           return (
             <div
               key={index}
@@ -28,4 +28,4 @@ const MonthView = ({
   );
 };
 
-export default MonthView;
+export default WeekView;

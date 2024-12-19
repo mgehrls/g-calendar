@@ -1,17 +1,4 @@
-const months = [
-    { name: 'January', short: 'Jan' },
-    { name: 'February', short: 'Feb' },
-    { name: 'March', short: 'Mar' },
-    { name: 'April', short: 'Apr' },
-    { name: 'May', short: 'May' },
-    { name: 'June', short: 'Jun' },
-    { name: 'July', short: 'Jul' },
-    { name: 'August', short: 'Aug' },
-    { name: 'September', short: 'Sep' },
-    { name: 'October', short: 'Oct' },
-    { name: 'November', short: 'Nov' },
-    { name: 'December', short: 'Dec' },
-]
+import { months } from "./globals";
 
 export default function useDates(date: Date) {
 
@@ -21,26 +8,52 @@ export default function useDates(date: Date) {
     const month = months[displayedMonth] ? months[displayedMonth] : { name: 'Something went wrong', short: '' };
     const displayedYear = displayedDate.getFullYear();
     const daysInMonth = new Date(displayedYear, displayedMonth + 1, 0).getDate();
-    const firstDay = new Date(displayedYear, displayedMonth, 1).getDay();
+    const firstOfMonthWeekday = new Date(displayedYear, displayedMonth, 1).getDay();
+    const displayDateWeekday = displayedDate.getDay();
     const lastMonthDays = new Date(displayedYear, displayedMonth, 0).getDate();
-    const monthDatesToRender = getDatesToDisplay();
-    const displaysLastMonth = firstDay > 0;
-    const displaysNextMonth = monthDatesToRender.length % 7 !== 0;
+    const monthDatesToRender = getMonthDatesToDisplay();
+    const weekDatesToRender = getWeekDatesToDisplay();
+
+    function getWeekDatesToDisplay() {
+        const goingToLastMonth = displayedDate.getDate() - displayDateWeekday < 1;
+        const goingToNextMonth = displayedDate.getDate() - displayDateWeekday + (7 - displayDateWeekday +1) > daysInMonth;
+
+        if(goingToLastMonth) {
+            const firstDateOfMonthsWeekday = new Date(displayedYear, displayedMonth, 1).getDay();
+            const lastMonthDates = Array.from({ length: firstDateOfMonthsWeekday }).map((_, index) => {
+                return lastMonthDays - firstDateOfMonthsWeekday + index + 1;
+            });
+            return [...lastMonthDates, ...Array.from({ length: 7 - firstDateOfMonthsWeekday }).map((_, index) => {
+                return index + 1;
+            })];
+        }else if(goingToNextMonth) {
+            const lastDateOfMonthsWeekday = new Date(displayedYear, displayedMonth + 1, 0).getDay() + 1;
+            const daysToAdd = 7 - lastDateOfMonthsWeekday;
+            const nextMonthDates = Array.from({ length: daysToAdd }).map((_, index) => {
+                return index + 1;
+            });
+            return [...Array.from({ length: 7 - daysToAdd }).map((_, index) => {
+                return displayedDate.getDate() - displayDateWeekday + index;
+            }), ...nextMonthDates];
+        }else{
+            return Array.from({ length: 7 }).map((_, index) => {
+                return displayedDate.getDate() - displayDateWeekday + index;
+        });
+    }
+}
   
-    function getDatesToDisplay() {
+    function getMonthDatesToDisplay() {
       let dates = Array.from({ length: daysInMonth }).map((_, index) => {
         return index + 1;
       });
   
-      if (firstDay > 0) {
-        console.log('last month days', lastMonthDays);
-        const daysToAdd = firstDay;
+      if (firstOfMonthWeekday > 0) {
+        const daysToAdd = firstOfMonthWeekday;
         const lastMonthDates = Array.from({ length: daysToAdd }).map(
           (_, index) => {
             return lastMonthDays - daysToAdd + index + 1;
           },
         );
-        console.log("last month dates", lastMonthDates);
   
         dates = [...lastMonthDates, ...dates];
       }
@@ -61,12 +74,11 @@ export default function useDates(date: Date) {
 
     return {
         monthDatesToRender,
+        weekDatesToRender,
         displayedMonth,
         displayedYear,
         currentDate,
         displayedDate,
-        displaysLastMonth,
-        displaysNextMonth,
         month,
     }
 }
