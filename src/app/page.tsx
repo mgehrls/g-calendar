@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import MonthView from "~/components/MonthView";
+import WeekView from "~/components/WeekView";
 import useDates from "~/utils/useDates";
 
 type ViewEnum = "Day" | "Week" | "Month";
@@ -10,15 +11,12 @@ const DayView = () => {
   return <div>Day</div>;
 };
 
-const WeekView = () => {
-  return <div>Week</div>;
-};
-
 export default function HomePage() {
   const [view, setView] = useState<ViewEnum>("Month");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date(2024, 1, 15));
   const {
     monthDatesToRender,
+    weekDatesToRender,
     month,
     currentDate,
     displayedMonth,
@@ -64,7 +62,13 @@ export default function HomePage() {
       case "Day":
         return <DayView />;
       case "Week":
-        return <WeekView />;
+        return (
+          <WeekView
+            weekDatesToRender={weekDatesToRender}
+            currentDate={currentDate}
+            currentDateOnDisplay={currentDateOnDisplay}
+          />
+        );
       case "Month":
         return (
           <MonthView
