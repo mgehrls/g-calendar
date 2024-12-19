@@ -1,12 +1,4 @@
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+import { days } from "~/utils/globals";
 
 const MonthView = ({
   currentDateOnDisplay,
