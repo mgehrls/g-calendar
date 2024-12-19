@@ -1,4 +1,5 @@
 import { days } from "~/utils/globals";
+import Weekdays from "./Weekdays";
 
 const MonthView = ({
   currentDateOnDisplay,
@@ -10,24 +11,20 @@ const MonthView = ({
   currentDate: Date;
 }) => {
   return (
-    <div className="grid grid-cols-7 gap-[1px] bg-black p-[1px]">
-      {days.map((day, index) => {
-        return (
-          <div key={index} className="truncate bg-gray-300 px-4 py-1">
-            {day}
-          </div>
-        );
-      })}
-      {monthDatesToRender.map((date, index) => {
-        return (
-          <div
-            key={index}
-            className={`max-h-40 bg-gray-300 p-4 ${currentDateOnDisplay && date === currentDate.getDate() ? "bg-blue-300" : ""}`}
-          >
-            {date}
-          </div>
-        );
-      })}
+    <div className="flex h-full flex-col gap-[1px] bg-black p-[1px]">
+      <Weekdays />
+      <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto">
+        {monthDatesToRender.map((date, index) => {
+          return (
+            <div
+              key={index}
+              className={`bg-gray-300 p-4 ${currentDateOnDisplay && date === currentDate.getDate() ? "bg-blue-300" : ""}`}
+            >
+              {date}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

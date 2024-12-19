@@ -85,29 +85,31 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-300 p-2">
-      <div className="flex items-center gap-4 p-2">
-        <button
-          onClick={() => setDateToToday()}
-          aria-label={`Show me ${view === "Day" ? "todays" : `this ${view}s`} calendar.`}
-        >
-          Today
-        </button>
-        <button onClick={() => goBackOneUnit()}>{"<"}</button>
-        <button onClick={() => goForwardOneUnit()}>{">"}</button>
-        <h1>{`${month.name} ${displayedYear}`}</h1>
-        {date.toDateString()}
-        <select
-          className="bg-gray-300 p-2"
-          value={view}
-          onChange={(e) => handleViewChange(e)}
-        >
-          <option value="Day">Day</option>
-          <option value="Week">Week</option>
-          <option value="Month">Month</option>
-        </select>
+    <main className="h-screen max-h-screen bg-gray-300 p-2">
+      <div className="p- flex h-full max-h-full flex-col overflow-hidden bg-gray-100">
+        <div className="flex items-center gap-4 bg-gray-200 p-2">
+          <button
+            onClick={() => setDateToToday()}
+            aria-label={`Show me ${view === "Day" ? "todays" : `this ${view}s`} calendar.`}
+          >
+            Today
+          </button>
+          <button onClick={() => goBackOneUnit()}>{"<"}</button>
+          <button onClick={() => goForwardOneUnit()}>{">"}</button>
+          <h1>{`${month.name} ${displayedYear}`}</h1>
+          {date.toDateString()}
+          <select
+            className="bg-gray-300 p-2"
+            value={view}
+            onChange={(e) => handleViewChange(e)}
+          >
+            <option value="Day">Day</option>
+            <option value="Week">Week</option>
+            <option value="Month">Month</option>
+          </select>
+        </div>
+        <View />
       </div>
-      <View />
     </main>
   );
 }
