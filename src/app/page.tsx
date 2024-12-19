@@ -1,15 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import DayView from "~/components/DayView";
 import MonthView from "~/components/MonthView";
 import WeekView from "~/components/WeekView";
+import { getDaysShort } from "~/utils/globals";
 import useDates from "~/utils/useDates";
 
 type ViewEnum = "Day" | "Week" | "Month";
-
-const DayView = () => {
-  return <div>Day</div>;
-};
 
 export default function HomePage() {
   const [view, setView] = useState<ViewEnum>("Month");
@@ -21,10 +19,14 @@ export default function HomePage() {
     currentDate,
     displayedMonth,
     displayedYear,
+    displayedDateFull,
   } = useDates(date);
   const currentDateOnDisplay =
     displayedMonth === currentDate.getMonth() &&
     displayedYear === currentDate.getFullYear();
+  const isCurrentDate =
+    currentDateOnDisplay &&
+    currentDate.getDate() === displayedDateFull.getDate();
 
   function setDateToToday() {
     setDate(new Date());
@@ -60,7 +62,13 @@ export default function HomePage() {
   const View = () => {
     switch (view) {
       case "Day":
-        return <DayView />;
+        return (
+          <DayView
+            date={currentDate.getDate()}
+            day={getDaysShort(displayedDateFull.getDay())}
+            isCurrentDate={isCurrentDate}
+          />
+        );
       case "Week":
         return (
           <WeekView
@@ -90,8 +98,8 @@ export default function HomePage() {
 
   return (
     <main className="h-screen max-h-screen bg-gray-300 p-2">
-      <div className="p- flex h-full max-h-full flex-col overflow-hidden bg-gray-100">
-        <div className="flex items-center gap-4 bg-gray-200 p-2">
+      <div className="p- flex h-full max-h-full flex-col overflow-hidden">
+        <div className="flex items-center gap-4 p-2">
           <button
             onClick={() => setDateToToday()}
             aria-label={`Show me ${view === "Day" ? "todays" : `this ${view}s`} calendar.`}
