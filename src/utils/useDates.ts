@@ -16,10 +16,6 @@ export default function useDates(date: Date) {
     console.log(weekDatesToRender)
 
     function getWeekDatesToDisplay() {
-        // get the first day of the week by figuring out how many days to subtract from the current date
-        // will you be going outside of the current month in this week?
-        // if not, then you can just subtract the current day of the week from the current date and for loop to add 7 days
-        // if yes, are you going to last month or next month?
         const goingToLastMonth = displayedDate.getDate() - displayDateWeekday < 1;
         const goingToNextMonth = displayedDate.getDate() - displayDateWeekday + (7 - displayDateWeekday +1) > daysInMonth;
 
