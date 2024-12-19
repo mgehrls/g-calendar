@@ -2,21 +2,22 @@ import { months } from "./globals";
 
 export default function useDates(date: Date) {
 
-    const displayedDate = new Date(date);
+    const displayedDateFull = new Date(date);
     const currentDate = new Date();
-    const displayedMonth = displayedDate.getMonth();
+    const displayedYear = displayedDateFull.getFullYear();
+    const displayedMonth = displayedDateFull.getMonth();
+    const displayedDate = displayedDateFull.getDate();
     const month = months[displayedMonth] ? months[displayedMonth] : { name: 'Something went wrong', short: '' };
-    const displayedYear = displayedDate.getFullYear();
     const daysInMonth = new Date(displayedYear, displayedMonth + 1, 0).getDate();
     const firstOfMonthWeekday = new Date(displayedYear, displayedMonth, 1).getDay();
-    const displayDateWeekday = displayedDate.getDay();
+    const displayDateWeekday = displayedDateFull.getDay();
     const lastMonthDays = new Date(displayedYear, displayedMonth, 0).getDate();
     const monthDatesToRender = getMonthDatesToDisplay();
     const weekDatesToRender = getWeekDatesToDisplay();
 
     function getWeekDatesToDisplay() {
-        const goingToLastMonth = displayedDate.getDate() - displayDateWeekday < 1;
-        const goingToNextMonth = displayedDate.getDate() - displayDateWeekday + (7 - displayDateWeekday +1) > daysInMonth;
+        const goingToLastMonth = displayedDateFull.getDate() - displayDateWeekday < 1;
+        const goingToNextMonth = displayedDateFull.getDate() - displayDateWeekday + (7 - displayDateWeekday +1) > daysInMonth;
 
         if(goingToLastMonth) {
             const firstDateOfMonthsWeekday = new Date(displayedYear, displayedMonth, 1).getDay();
@@ -33,11 +34,11 @@ export default function useDates(date: Date) {
                 return index + 1;
             });
             return [...Array.from({ length: 7 - daysToAdd }).map((_, index) => {
-                return displayedDate.getDate() - displayDateWeekday + index;
+                return displayedDateFull.getDate() - displayDateWeekday + index;
             }), ...nextMonthDates];
         }else{
             return Array.from({ length: 7 }).map((_, index) => {
-                return displayedDate.getDate() - displayDateWeekday + index;
+                return displayedDateFull.getDate() - displayDateWeekday + index;
         });
     }
 }
@@ -75,10 +76,11 @@ export default function useDates(date: Date) {
     return {
         monthDatesToRender,
         weekDatesToRender,
+        displayedDate,
         displayedMonth,
         displayedYear,
         currentDate,
-        displayedDate,
+        displayedDateFull,
         month,
     }
 }
