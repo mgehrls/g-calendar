@@ -13,7 +13,7 @@ const DayView = () => {
 
 export default function HomePage() {
   const [view, setView] = useState<ViewEnum>("Month");
-  const [date, setDate] = useState(new Date(2024, 1, 15));
+  const [date, setDate] = useState(new Date());
   const {
     monthDatesToRender,
     weekDatesToRender,
