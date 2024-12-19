@@ -13,7 +13,6 @@ export default function useDates(date: Date) {
     const lastMonthDays = new Date(displayedYear, displayedMonth, 0).getDate();
     const monthDatesToRender = getMonthDatesToDisplay();
     const weekDatesToRender = getWeekDatesToDisplay();
-    console.log(weekDatesToRender)
 
     function getWeekDatesToDisplay() {
         const goingToLastMonth = displayedDate.getDate() - displayDateWeekday < 1;
