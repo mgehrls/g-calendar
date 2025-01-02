@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { hours } from "~/utils/globals";
+import Hours from "./Hours";
 
 export default function DayView({
   day,
@@ -33,18 +34,7 @@ export default function DayView({
         </div>
       </div>
       <div className="flex overflow-y-scroll rounded-b-3xl bg-white">
-        <div>
-          {hours.map((hour, index) => (
-            <div key={hour} className="relative flex">
-              <div className="flex h-[40px] w-14 items-start justify-center">
-                <p className="absolute -top-2 z-10 bg-white px-1 text-xs">
-                  {index > 0 && hour}
-                </p>
-              </div>
-              <div className="absolute h-[1px] w-full bg-gray-300" />
-            </div>
-          ))}
-        </div>
+        <Hours />
         <div className="flex h-full w-full flex-col border-l-[1px] bg-white">
           {hours.map((hour) => (
             <div key={hour} className="relative flex w-full">
