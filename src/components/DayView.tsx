@@ -32,17 +32,27 @@ export default function DayView({
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-[1px] overflow-y-scroll rounded-b-3xl bg-gray-300">
-        {hours.map((hour, index) => (
-          <div key={hour} className="gap[1px] relative flex w-full bg-white">
-            <div className="flex size-12 items-start justify-center">
-              <p className="absolute -top-2 z-10 bg-white px-1 text-xs">
-                {index > 0 && hour}
-              </p>
+      <div className="flex overflow-y-scroll rounded-b-3xl bg-white">
+        <div>
+          {hours.map((hour, index) => (
+            <div key={hour} className="relative flex">
+              <div className="flex h-[40px] w-14 items-start justify-center">
+                <p className="absolute -top-2 z-10 bg-white px-1 text-xs">
+                  {index > 0 && hour}
+                </p>
+              </div>
+              <div className="absolute h-[1px] w-full bg-gray-300" />
             </div>
-            <div className="w-full" />
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="flex h-full w-full flex-col border-l-[1px] bg-white">
+          {hours.map((hour) => (
+            <div key={hour} className="relative flex w-full">
+              <div className="h-[40px] w-full" />
+              <div className="absolute h-[1px] w-full bg-gray-300" />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
