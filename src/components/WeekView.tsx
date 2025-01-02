@@ -14,9 +14,13 @@ const WeekView = ({
 }) => {
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white">
-      <div className="ml-14 flex flex-col gap-2 py-4">
+      <div className="ml-14 flex flex-col py-4">
         <Weekdays />
-        <WeekDates weekDatesToRender={weekDatesToRender} />
+        <WeekDates
+          currentDate={currentDate}
+          currentDateOnDisplay={currentDateOnDisplay}
+          weekDatesToRender={weekDatesToRender}
+        />
       </div>
       <div className="flex w-full overflow-y-scroll rounded-b-3xl bg-white">
         <Hours />
