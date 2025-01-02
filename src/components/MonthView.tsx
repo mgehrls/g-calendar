@@ -10,7 +10,7 @@ const MonthView = ({
   currentDate: Date;
 }) => {
   return (
-    <div className="flex h-full flex-col gap-[1px] bg-black p-[1px]">
+    <div className="flex h-full flex-col gap-[1px] p-[1px]">
       <Weekdays />
       <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto">
         {monthDatesToRender.map((date, index) => {
