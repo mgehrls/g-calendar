@@ -13,8 +13,8 @@ const MonthView = ({
   const bottomLeft = monthDatesToRender.length - 7;
   const bottomRight = monthDatesToRender.length - 1;
   return (
-    <div className="flex h-full flex-col p-[1px] bg-gray-300 rounded-3xl">
-      <div className="grid h-full grid-cols-7 grid-rows-[auto] overflow-auto gap-[1px] rounded-3xl">
+    <div className="flex h-full flex-col rounded-3xl bg-gray-300 p-[1px]">
+      <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto rounded-3xl">
         {monthDatesToRender.map((date, index) => {
           const notCurrentMonth =
             (date > 20 && index < 7) || (date < 10 && index > 20);
@@ -34,7 +34,16 @@ const MonthView = ({
               )}
             >
               {index < 7 && <p>{getDaysShort(index)}</p>}
-              <p>{date}</p>
+              <p
+                className={clsx(
+                  "flex size-6 items-center justify-center",
+                  currentDateOnDisplay && date === currentDate.getDate()
+                    ? "rounded-full bg-blue-500 text-white"
+                    : "",
+                )}
+              >
+                {date}
+              </p>
             </div>
           );
         })}
