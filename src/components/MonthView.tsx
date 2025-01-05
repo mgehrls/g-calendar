@@ -1,17 +1,26 @@
 import clsx from "clsx";
 import { getDaysShort } from "~/utils/globals";
+import { type Event } from "~/utils/fakeEvents";
 
 const MonthView = ({
+  events,
   currentDateOnDisplay,
   monthDatesToRender,
   currentDate,
 }: {
+  events: Event[];
   currentDateOnDisplay: boolean;
   monthDatesToRender: number[];
   currentDate: Date;
 }) => {
   const bottomLeft = monthDatesToRender.length - 7;
   const bottomRight = monthDatesToRender.length - 1;
+
+  const eventToDisplay = events.filter((event) => {
+    const eventDate = event.dateStart.getDate();
+    return monthDatesToRender.includes(eventDate);
+  });
+  console.log(eventToDisplay);
   return (
     <div className="flex h-full flex-col rounded-3xl bg-gray-300 p-[1px]">
       <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto rounded-3xl">

@@ -1,12 +1,15 @@
 import clsx from "clsx";
 import { hours } from "~/utils/globals";
 import Hours from "./Hours";
+import { type Event } from "~/utils/fakeEvents";
 
 export default function DayView({
+  events,
   day,
   date,
   isCurrentDate,
 }: {
+  events: Event[];
   day: string;
   date: number;
   isCurrentDate?: boolean;

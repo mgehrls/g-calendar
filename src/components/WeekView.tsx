@@ -2,12 +2,15 @@ import { hours } from "~/utils/globals";
 import Hours from "./Hours";
 import WeekDates from "./WeekDates";
 import Weekdays from "./Weekdays";
+import { type Event } from "~/utils/fakeEvents";
 
 const WeekView = ({
+  events,
   currentDateOnDisplay,
   weekDatesToRender,
   currentDate,
 }: {
+  events: Event[];
   currentDateOnDisplay: boolean;
   weekDatesToRender: number[];
   currentDate: Date;
