@@ -29,9 +29,7 @@ const MonthView = ({
           const notCurrentMonth =
             (date.getDate() > 20 && index < 7) ||
             (date.getDate() < 10 && index > 20);
-          const daysEvents = filterDaysEvents(date, eventsToDisplay).sort(
-            (a, b) => a.dateStart.getTime() - b.dateStart.getTime(),
-          );
+          const daysEvents = filterDaysEvents(date, eventsToDisplay);
           return (
             <div
               key={index}

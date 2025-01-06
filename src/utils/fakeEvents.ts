@@ -60,7 +60,7 @@ export function filterDaysEvents(date: Date, monthsEvents: Event[]) {
       eventDate.getMonth() === targetMonth &&
       eventDate.getFullYear() === targetYear
     );
-  });
+  }).sort((a, b) => a.dateStart.getTime() - b.dateStart.getTime());
   }
 
 export function filterMonthsEvents(month: number, year: number, events: Event[]) {
