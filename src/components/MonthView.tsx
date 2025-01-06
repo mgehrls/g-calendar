@@ -1,11 +1,15 @@
 import clsx from "clsx";
 import { getDaysShort } from "~/utils/globals";
-import { type Event } from "~/utils/fakeEvents";
+import {
+  filterDaysEvents,
+  filterThreeMonthsEvents,
+  type Event,
+} from "~/utils/fakeEvents";
 
 const MonthView = ({
   events,
-  currentDateOnDisplay,
   monthDatesToRender,
+  displayedDateFull,
   currentDate,
 }: {
   events: Event[];
@@ -16,26 +20,23 @@ const MonthView = ({
   const bottomLeft = monthDatesToRender.length - 7;
   const bottomRight = monthDatesToRender.length - 1;
 
-  const eventToDisplay = events.filter((event) => {
-    const eventDate = event.dateStart.getDate();
-    return monthDatesToRender.includes(eventDate);
-  });
-  console.log(eventToDisplay);
+  const eventsToDisplay = filterThreeMonthsEvents(displayedDateFull, events);
+
   return (
     <div className="flex h-full flex-col rounded-3xl bg-gray-300 p-[1px]">
-      <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto rounded-3xl">
+      <div className="grid h-full auto-rows-[minmax(0,_1fr)] grid-cols-7 gap-[1px] overflow-auto rounded-3xl">
         {monthDatesToRender.map((date, index) => {
           const notCurrentMonth =
             (date.getDate() > 20 && index < 7) ||
-(date.getDate() < 10 && index > 20);
+            (date.getDate() < 10 && index > 20);
+          const daysEvents = filterDaysEvents(date, eventsToDisplay).sort(
+            (a, b) => a.dateStart.getTime() - b.dateStart.getTime(),
+          );
           return (
             <div
               key={index}
               className={clsx(
                 "flex flex-col items-center bg-white py-2 text-xs",
-                currentDateOnDisplay && date === currentDate.getDate()
-                  ? "bg-blue-300"
-                  : "",
                 notCurrentMonth && "bg-gray-100 text-gray-500",
                 index === 0 && "rounded-tl-3xl",
                 index === 6 && "rounded-tr-3xl",
@@ -55,6 +56,16 @@ const MonthView = ({
               >
                 {date.getDate()}
               </p>
+              {daysEvents.map((event) => {
+                return (
+                  <div
+                    key={event.id}
+                    className="flex w-full items-center rounded-md bg-blue-500 px-2 text-white"
+                  >
+                    <p className="truncate">{event.title}</p>
+                  </div>
+                );
+              })}
             </div>
           );
         })}

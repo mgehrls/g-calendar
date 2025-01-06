@@ -86,7 +86,7 @@ export default function HomePage() {
             events={events}
             monthDatesToRender={monthDatesToRender}
             currentDate={currentDate}
-            currentDateOnDisplay={currentDateOnDisplay}
+            displayedDateFull={displayedDateFull}
           />
         );
       default:
@@ -95,7 +95,7 @@ export default function HomePage() {
             events={events}
             monthDatesToRender={monthDatesToRender}
             currentDate={currentDate}
-            currentDateOnDisplay={currentDateOnDisplay}
+            displayedDateFull={displayedDateFull}
           />
         );
     }
