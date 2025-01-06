@@ -9,8 +9,8 @@ const MonthView = ({
   currentDate,
 }: {
   events: Event[];
-  currentDateOnDisplay: boolean;
-  monthDatesToRender: number[];
+  monthDatesToRender: Date[];
+  displayedDateFull: Date;
   currentDate: Date;
 }) => {
   const bottomLeft = monthDatesToRender.length - 7;
@@ -26,7 +26,8 @@ const MonthView = ({
       <div className="grid h-full grid-cols-7 grid-rows-[auto] gap-[1px] overflow-auto rounded-3xl">
         {monthDatesToRender.map((date, index) => {
           const notCurrentMonth =
-            (date > 20 && index < 7) || (date < 10 && index > 20);
+            (date.getDate() > 20 && index < 7) ||
+(date.getDate() < 10 && index > 20);
           return (
             <div
               key={index}
@@ -46,12 +47,13 @@ const MonthView = ({
               <p
                 className={clsx(
                   "flex size-6 items-center justify-center",
-                  currentDateOnDisplay && date === currentDate.getDate()
+                  date.getMonth() === currentDate.getMonth() &&
+                    date.getDate() === currentDate.getDate()
                     ? "rounded-full bg-blue-500 text-white"
                     : "",
                 )}
               >
-                {date}
+                {date.getDate()}
               </p>
             </div>
           );

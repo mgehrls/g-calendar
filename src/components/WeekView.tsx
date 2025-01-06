@@ -12,7 +12,7 @@ const WeekView = ({
 }: {
   events: Event[];
   currentDateOnDisplay: boolean;
-  weekDatesToRender: number[];
+  weekDatesToRender: Date[];
   currentDate: Date;
 }) => {
   return (
@@ -32,7 +32,7 @@ const WeekView = ({
             return (
               <div
                 key={index}
-                className={`flex justify-center ${currentDateOnDisplay && date === currentDate.getDate() ? "bg-blue-300" : ""}`}
+                className={`flex justify-center ${date.getMonth() === currentDate.getMonth() && date.getDate() === currentDate.getDate() ? "bg-blue-300" : ""}`}
               >
                 <div className="flex w-full flex-col border-l-[1px] bg-white">
                   {hours.map((hour) => (
