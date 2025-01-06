@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { hours } from "~/utils/globals";
 import Hours from "./Hours";
-import { type Event } from "~/utils/fakeEvents";
+import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
+import { renderDaysEvents } from "~/utils/renderDates";
 
 export default function DayView({
   events,
@@ -11,9 +12,10 @@ export default function DayView({
 }: {
   events: Event[];
   day: string;
-  date: number;
+  date: Date;
   isCurrentDate?: boolean;
 }) {
+  const daysEvents = filterDaysEvents(date, events);
   return (
     <>
       <div className="flex flex-col items-start justify-center rounded-t-3xl bg-white">
@@ -32,19 +34,20 @@ export default function DayView({
               isCurrentDate && "bg-blue-500 text-white",
             )}
           >
-            <p className="text-2xl font-semibold">{date}</p>
+            <p className="text-2xl font-semibold">{date.getDate()}</p>
           </div>
         </div>
       </div>
       <div className="flex overflow-y-scroll rounded-b-3xl bg-white">
         <Hours />
-        <div className="flex h-full w-full flex-col border-l-[1px] bg-white">
+        <div className="relative flex h-full w-full flex-col border-l-[1px] bg-white">
           {hours.map((hour) => (
             <div key={hour} className="relative flex w-full">
               <div className="h-[40px] w-full" />
               <div className="absolute h-[1px] w-full bg-gray-300" />
             </div>
           ))}
+          {renderDaysEvents(daysEvents)}
         </div>
       </div>
     </>

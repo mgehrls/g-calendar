@@ -66,7 +66,7 @@ export default function HomePage() {
         return (
           <DayView
             events={events}
-            date={displayedDateFull.getDate()}
+            date={displayedDateFull}
             day={getDaysShort(displayedDateFull.getDay())}
             isCurrentDate={isCurrentDate}
           />
