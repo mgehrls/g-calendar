@@ -58,7 +58,7 @@ const MonthView = ({
                 return (
                   <div
                     key={event.id}
-                    className="flex w-full items-center rounded-md bg-blue-500 px-2 text-white"
+                    className="flex w-full items-center rounded-md border-[1px] border-blue-800 bg-blue-500 px-2 text-white"
                   >
                     <p className="truncate">{event.title}</p>
                   </div>
