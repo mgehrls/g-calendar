@@ -6,6 +6,7 @@ import MonthView from "~/components/MonthView";
 import WeekView from "~/components/WeekView";
 import { getDaysShort } from "~/utils/globals";
 import useDates from "~/utils/useDates";
+import { events } from "~/utils/fakeEvents";
 
 type ViewEnum = "Day" | "Week" | "Month";
 
@@ -64,7 +65,8 @@ export default function HomePage() {
       case "Day":
         return (
           <DayView
-            date={displayedDateFull.getDate()}
+            events={events}
+            date={displayedDateFull}
             day={getDaysShort(displayedDateFull.getDay())}
             isCurrentDate={isCurrentDate}
           />
@@ -72,6 +74,7 @@ export default function HomePage() {
       case "Week":
         return (
           <WeekView
+            events={events}
             weekDatesToRender={weekDatesToRender}
             currentDate={currentDate}
             currentDateOnDisplay={currentDateOnDisplay}
@@ -80,17 +83,19 @@ export default function HomePage() {
       case "Month":
         return (
           <MonthView
+            events={events}
             monthDatesToRender={monthDatesToRender}
             currentDate={currentDate}
-            currentDateOnDisplay={currentDateOnDisplay}
+            displayedDateFull={displayedDateFull}
           />
         );
       default:
         return (
           <MonthView
+            events={events}
             monthDatesToRender={monthDatesToRender}
             currentDate={currentDate}
-            currentDateOnDisplay={currentDateOnDisplay}
+            displayedDateFull={displayedDateFull}
           />
         );
     }
