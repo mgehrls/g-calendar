@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { DayView, MonthView, WeekView } from "~/components/Views";
+import {
+  DayView,
+  MonthView,
+  WeekView,
+  SchedulerView,
+} from "~/components/Views";
 import { getDaysShort } from "~/utils/globals";
 import useDates from "~/utils/useDates";
 import { events } from "~/utils/fakeEvents";
 
-type ViewEnum = "Day" | "Week" | "Month";
+type ViewEnum = "Day" | "Week" | "Month" | "Scheduler";
 
 export default function HomePage() {
   const [view, setView] = useState<ViewEnum>("Month");
@@ -51,7 +56,12 @@ export default function HomePage() {
 
   function handleViewChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
-    if (value === "Day" || value === "Week" || value === "Month") {
+    if (
+      value === "Day" ||
+      value === "Week" ||
+      value === "Month" ||
+      value === "Scheduler"
+    ) {
       setView(value as ViewEnum);
     } else {
       console.error("Invalid view value selected in handleViewChange");
@@ -85,6 +95,14 @@ export default function HomePage() {
             monthDatesToRender={monthDatesToRender}
             currentDate={currentDate}
             displayedDateFull={displayedDateFull}
+          />
+        );
+      case "Scheduler":
+        return (
+          <SchedulerView
+            weekDatesToRender={weekDatesToRender}
+            currentDate={currentDate}
+            currentDateOnDisplay={currentDateOnDisplay}
           />
         );
       default:
@@ -121,6 +139,7 @@ export default function HomePage() {
             <option value="Day">Day</option>
             <option value="Week">Week</option>
             <option value="Month">Month</option>
+            <option value="Scheduler">Scheduler</option>
           </select>
         </div>
         <View />
