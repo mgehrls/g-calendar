@@ -1,4 +1,5 @@
 import { type Event } from "../utils/fakeEvents";
+import { calendarHourSizeInPixels } from "./globals";
 
 export function renderDaysEvents(events: Event[]) {
   return events.map((event, i) => {
@@ -6,9 +7,12 @@ export function renderDaysEvents(events: Event[]) {
     const startMinute = event.dateStart.getMinutes();
     const endHour = event.dateEnd.getHours();
     const endMinute = event.dateEnd.getMinutes();
-    const top = startHour * 40 + (startMinute / 60) * 40;
+    const top =
+      startHour * calendarHourSizeInPixels +
+      (startMinute / 60) * calendarHourSizeInPixels;
     const height =
-      (endHour - startHour) * 40 + ((endMinute - startMinute) / 60) * 40;
+      (endHour - startHour) * calendarHourSizeInPixels +
+      ((endMinute - startMinute) / 60) * calendarHourSizeInPixels;
 
     return (
       <div

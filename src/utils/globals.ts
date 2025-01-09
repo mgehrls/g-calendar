@@ -49,6 +49,20 @@ export const hours = [
     "10 PM",
     "11 PM",
 ]
+export const calendarHourSizeInPixels = 40;
+export const workHours = [
+    "7 AM",
+    "8 AM",
+    "9 AM",
+    "10 AM",
+    "11 AM",
+    "12 PM",
+    "1 PM",
+    "2 PM",
+    "3 PM",
+    "4 PM",
+]
+export const schedulerHourSizeInPixels = 80;
 
 export const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 

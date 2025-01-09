@@ -1,10 +1,10 @@
-import { hours } from "~/utils/globals";
+import { calendarHourSizeInPixels, hours } from "~/utils/globals";
 import Hours from "../Hours";
 import WeekDates from "../WeekDates";
-import Weekdays from "../Weekdays";
 import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
 import clsx from "clsx";
 import { renderDaysEvents } from "~/utils/renderDates";
+import Weekdays from "../Weekdays";
 
 const WeekView = ({
   events,
@@ -80,7 +80,9 @@ const WeekView = ({
                 <div className="relative flex w-full flex-col overflow-auto border-l-[1px] bg-white">
                   {hours.map((hour) => (
                     <div key={hour} className="flex w-full">
-                      <div className="h-[40px] w-full" />
+                      <div
+                        className={`h-[${calendarHourSizeInPixels}px] w-full`}
+                      />
                       <div className="absolute h-[1px] w-full bg-gray-300" />
                     </div>
                   ))}
