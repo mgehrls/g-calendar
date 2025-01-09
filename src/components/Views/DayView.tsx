@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { hours } from "~/utils/globals";
-import Hours from "./Hours";
+import Hours from "../Hours";
 import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
 import { renderDaysEvents } from "~/utils/renderDates";
 

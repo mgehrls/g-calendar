@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import DayView from "~/components/DayView";
-import MonthView from "~/components/MonthView";
-import WeekView from "~/components/WeekView";
+import { DayView, MonthView, WeekView } from "~/components/Views";
 import { getDaysShort } from "~/utils/globals";
 import useDates from "~/utils/useDates";
 import { events } from "~/utils/fakeEvents";

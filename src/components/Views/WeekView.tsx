@@ -1,7 +1,7 @@
 import { hours } from "~/utils/globals";
-import Hours from "./Hours";
-import WeekDates from "./WeekDates";
-import Weekdays from "./Weekdays";
+import Hours from "../Hours";
+import WeekDates from "../WeekDates";
+import Weekdays from "../Weekdays";
 import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
 import clsx from "clsx";
 import { renderDaysEvents } from "~/utils/renderDates";
