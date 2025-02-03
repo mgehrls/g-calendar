@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { calendarHourSizeInPixels, hours } from "~/utils/globals";
 import Hours from "../Hours";
-import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
+import { filterDaysEvents } from "~/utils/fakeEvents";
+import { type Event } from "~/utils/types";
 import { renderDaysEvents } from "~/utils/renderDates";
 
 export default function DayView({

@@ -1,4 +1,4 @@
-import { type Event } from "../utils/fakeEvents";
+import { type Event } from "../utils/types";
 import { calendarHourSizeInPixels } from "./globals";
 
 export function renderDaysEvents(events: Event[]) {

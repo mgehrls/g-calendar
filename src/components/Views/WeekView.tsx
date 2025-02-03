@@ -1,10 +1,11 @@
 import { calendarHourSizeInPixels, hours } from "~/utils/globals";
 import Hours from "../Hours";
 import WeekDates from "../WeekDates";
-import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
+import { filterDaysEvents } from "~/utils/fakeEvents";
 import clsx from "clsx";
 import { renderDaysEvents } from "~/utils/renderDates";
 import Weekdays from "../Weekdays";
+import { type Event } from "~/utils/types";
 
 const WeekView = ({
   events,

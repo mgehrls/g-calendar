@@ -1,12 +1,4 @@
-export type Event = {
-    id: number;
-    title: string;
-    description: string;
-    dateStart: Date;
-    dateEnd: Date;
-    location: string;
-    image: string;
-}
+import { type Event } from "../utils/types";
 
 export const events: Event[] = [
     //previous year example
