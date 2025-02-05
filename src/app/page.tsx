@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import DayView from "~/components/DayView";
-import MonthView from "~/components/MonthView";
-import WeekView from "~/components/WeekView";
+import {
+  DayView,
+  MonthView,
+  WeekView,
+  SchedulerView,
+} from "~/components/Views";
 import { getDaysShort } from "~/utils/globals";
 import useDates from "~/utils/useDates";
 import { events } from "~/utils/fakeEvents";
 
-type ViewEnum = "Day" | "Week" | "Month";
+type ViewEnum = "Day" | "Week" | "Month" | "Scheduler";
 
 export default function HomePage() {
   const [view, setView] = useState<ViewEnum>("Month");
@@ -35,7 +38,7 @@ export default function HomePage() {
   function goBackOneUnit() {
     if (view === "Day") {
       setDate(new Date(date.setDate(date.getDate() - 1)));
-    } else if (view === "Week") {
+    } else if (view === "Week" || view === "Scheduler") {
       setDate(new Date(date.setDate(date.getDate() - 7)));
     } else {
       setDate(new Date(date.setMonth(date.getMonth() - 1)));
@@ -44,7 +47,7 @@ export default function HomePage() {
   function goForwardOneUnit() {
     if (view === "Day") {
       setDate(new Date(date.setDate(date.getDate() + 1)));
-    } else if (view === "Week") {
+    } else if (view === "Week" || view === "Scheduler") {
       setDate(new Date(date.setDate(date.getDate() + 7)));
     } else {
       setDate(new Date(date.setMonth(date.getMonth() + 1)));
@@ -53,8 +56,13 @@ export default function HomePage() {
 
   function handleViewChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
-    if (value === "Day" || value === "Week" || value === "Month") {
-      setView(value as ViewEnum);
+    if (
+      value === "Day" ||
+      value === "Week" ||
+      value === "Month" ||
+      value === "Scheduler"
+    ) {
+      setView(value);
     } else {
       console.error("Invalid view value selected in handleViewChange");
     }
@@ -87,6 +95,14 @@ export default function HomePage() {
             monthDatesToRender={monthDatesToRender}
             currentDate={currentDate}
             displayedDateFull={displayedDateFull}
+          />
+        );
+      case "Scheduler":
+        return (
+          <SchedulerView
+            weekDatesToRender={weekDatesToRender}
+            currentDate={currentDate}
+            currentDateOnDisplay={currentDateOnDisplay}
           />
         );
       default:
@@ -123,6 +139,7 @@ export default function HomePage() {
             <option value="Day">Day</option>
             <option value="Week">Week</option>
             <option value="Month">Month</option>
+            <option value="Scheduler">Scheduler</option>
           </select>
         </div>
         <View />

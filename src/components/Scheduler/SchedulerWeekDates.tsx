@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-export default function WeekDates({
+export default function SchedulerWeekDates({
   weekDatesToRender,
   currentDateOnDisplay,
   currentDate,
@@ -9,9 +9,12 @@ export default function WeekDates({
   currentDateOnDisplay: boolean;
   currentDate: Date;
 }) {
+  const daysWithoutWeekends = weekDatesToRender.filter(
+    (date) => date.getDay() !== 0 && date.getDay() !== 6,
+  );
   return (
-    <div className="grid grid-cols-7 gap-[1px]">
-      {weekDatesToRender.map((date) => {
+    <div className="grid grid-cols-5 gap-[1px]">
+      {daysWithoutWeekends.map((date) => {
         const isCurrentDate =
           currentDateOnDisplay && date.getDate() === currentDate.getDate();
         return (

@@ -1,7 +1,8 @@
 import clsx from "clsx";
-import { hours } from "~/utils/globals";
-import Hours from "./Hours";
-import { filterDaysEvents, type Event } from "~/utils/fakeEvents";
+import { calendarHourSizeInPixels, hours } from "~/utils/globals";
+import Hours from "../Hours";
+import { filterDaysEvents } from "~/utils/fakeEvents";
+import { type Event } from "~/utils/types";
 import { renderDaysEvents } from "~/utils/renderDates";
 
 export default function DayView({
@@ -43,7 +44,7 @@ export default function DayView({
         <div className="relative flex h-full w-full flex-col border-l-[1px] bg-white">
           {hours.map((hour) => (
             <div key={hour} className="relative flex w-full">
-              <div className="h-[40px] w-full" />
+              <div className={`h-[${calendarHourSizeInPixels}px] w-full`} />
               <div className="absolute h-[1px] w-full bg-gray-300" />
             </div>
           ))}
