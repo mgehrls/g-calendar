@@ -1,4 +1,4 @@
-import { schedulerHourSizeInPixels, workHours } from "~/utils/globals";
+import { workHours } from "~/utils/globals";
 
 import clsx from "clsx";
 
@@ -33,6 +33,23 @@ const SchedulerView = ({
     (day) => day.getDay() !== 0 && day.getDay() !== 6,
   );
 
+  // TODO: reimplement constant for height
+  function getTimeSlotButtons(hour: string) {
+    const timeSlotButtons = [];
+    const hourNumber = hour.split(" ")[0];
+    for (let i = 1; i <= 12; i++) {
+      const timeString = `${hourNumber}:${i < 3 ? "0" : ""}${(i - 1) * 5}`;
+      timeSlotButtons.push(
+        <button
+          onClick={() => console.log(timeString)}
+          key={hour + (i - 1) * 5}
+          className={`h-[10px] w-full border-b-[1px] border-r-[1px] border-gray-300 bg-green-300`}
+        ></button>,
+      );
+    }
+    return timeSlotButtons;
+  }
+
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white">
       <div className="ml-14 flex flex-col py-4">
@@ -59,10 +76,8 @@ const SchedulerView = ({
               >
                 <div className="relative flex w-full flex-col overflow-auto border-l-[1px] bg-white">
                   {workHours.map((hour) => (
-                    <div key={hour} className="flex w-full">
-                      <div
-                        className={`h-[${schedulerHourSizeInPixels}px] w-full`}
-                      />
+                    <div key={hour} className="flex w-full flex-col">
+                      {getTimeSlotButtons(hour)}
                       <div className="absolute h-[1px] w-full bg-gray-300" />
                     </div>
                   ))}
