@@ -38,7 +38,7 @@ export default function HomePage() {
   function goBackOneUnit() {
     if (view === "Day") {
       setDate(new Date(date.setDate(date.getDate() - 1)));
-    } else if (view === "Week") {
+    } else if (view === "Week" || view === "Scheduler") {
       setDate(new Date(date.setDate(date.getDate() - 7)));
     } else {
       setDate(new Date(date.setMonth(date.getMonth() - 1)));
@@ -47,7 +47,7 @@ export default function HomePage() {
   function goForwardOneUnit() {
     if (view === "Day") {
       setDate(new Date(date.setDate(date.getDate() + 1)));
-    } else if (view === "Week") {
+    } else if (view === "Week" || view === "Scheduler") {
       setDate(new Date(date.setDate(date.getDate() + 7)));
     } else {
       setDate(new Date(date.setMonth(date.getMonth() + 1)));
@@ -62,7 +62,7 @@ export default function HomePage() {
       value === "Month" ||
       value === "Scheduler"
     ) {
-      setView(value as ViewEnum);
+      setView(value);
     } else {
       console.error("Invalid view value selected in handleViewChange");
     }
